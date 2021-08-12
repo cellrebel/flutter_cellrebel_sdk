@@ -6,6 +6,7 @@ import com.cellrebel.sdk.workers.TrackingManager;
 
 import androidx.annotation.NonNull;
 
+import io.flutter.Log;
 import io.flutter.embedding.engine.plugins.FlutterPlugin;
 import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
@@ -41,6 +42,15 @@ public class FlutterCellrebelSdkPlugin implements FlutterPlugin, MethodCallHandl
 			TrackingManager.startTracking(context);
 		} else if (call.method.equals("stopTracking")) {
 			TrackingManager.stopTracking(context);
+		} else if (call.method.equals("getVersion")) {
+			result.success(TrackingManager.getVersion());
+		} else if (call.method.equals("clearUserData")) {
+			TrackingManager.clearUserData(context, new TrackingManager.OnCompleteListener() {
+				@Override
+				public void onCompleted(boolean b) {
+					Log.d("CellrebelSDK", "clearUserData result " + b);
+				}
+			});
 		} else {
 			result.notImplemented();
 		}

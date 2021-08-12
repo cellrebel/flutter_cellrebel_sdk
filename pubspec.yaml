@@ -1,5 +1,5 @@
 name: flutter_cellrebel_sdk
-description: A new flutter plugin project.
+description: Flutter wrapper for CellRebelSDK
 version: 0.0.1
 homepage:
 

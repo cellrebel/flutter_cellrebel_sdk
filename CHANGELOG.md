@@ -1,3 +1,3 @@
 ## 0.0.1
 
-* TODO: Describe initial release.
+* init wrapper for Cellrebel SDK for Flutter application

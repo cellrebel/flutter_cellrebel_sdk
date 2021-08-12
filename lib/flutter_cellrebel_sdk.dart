@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/services.dart';
 
-class FlutterCellrebelSdk {
+class CellRebelSDK {
   static const MethodChannel _channel =
       const MethodChannel('flutter_cellrebel_sdk');
 
@@ -11,10 +11,13 @@ class FlutterCellrebelSdk {
     return version;
   }
 
+  static Future<String?> get getVersion async {
+    final String? version = await _channel.invokeMethod('getVersion');
+    return version;
+  }
+
   static Future<void> init(String clientId) async {
-    _channel.invokeMethod('init', <String, dynamic>{
-             'clientId': clientId
-           });
+    _channel.invokeMethod('init', <String, dynamic>{'clientId': clientId});
   }
 
   static Future<void> startTracking() async {
@@ -23,5 +26,9 @@ class FlutterCellrebelSdk {
 
   static Future<void> stopTracking() async {
     _channel.invokeMethod('stopTracking');
+  }
+
+  static Future<void> clearUserData() async {
+    _channel.invokeMethod('clearUserData');
   }
 }

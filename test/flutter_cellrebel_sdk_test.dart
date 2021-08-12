@@ -18,6 +18,6 @@ void main() {
   });
 
   test('getPlatformVersion', () async {
-    expect(await FlutterCellrebelSdk.platformVersion, '42');
+    expect(await CellRebelSDK.platformVersion, '42');
   });
 }
