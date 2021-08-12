@@ -5,6 +5,9 @@ buildscript {
     repositories {
         google()
         jcenter()
+        maven {
+            url 'https://raw.githubusercontent.com/cellrebel/CellRebelSDK/master/releases'
+        }
     }
 
     dependencies {
@@ -16,6 +19,9 @@ rootProject.allprojects {
     repositories {
         google()
         jcenter()
+        maven {
+            url 'https://raw.githubusercontent.com/cellrebel/CellRebelSDK/master/releases'
+        }
     }
 }
 
@@ -27,4 +33,12 @@ android {
     defaultConfig {
         minSdkVersion 16
     }
+    compileOptions {
+        targetCompatibility 1.8
+        sourceCompatibility 1.8
+    }
+}
+
+dependencies {
+    implementation 'com.cellrebel.android:cellrebel-sdk:1.8.3'
 }

@@ -20,6 +20,7 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     super.initState();
     initPlatformState();
+    FlutterCellrebelSdk.init("xpqc5glzli");
   }
 
   // Platform messages are asynchronous, so we initialize in an async method.
@@ -52,9 +53,21 @@ class _MyAppState extends State<MyApp> {
           title: const Text('Plugin example app'),
         ),
         body: Center(
-          child: Text('Running on: $_platformVersion\n'),
+          child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            ElevatedButton(
+              child: Text('Start tracking'),
+              onPressed: FlutterCellrebelSdk.startTracking,
+            ),
+            ElevatedButton(
+              child: Text('Stop tracking'),
+              onPressed: FlutterCellrebelSdk.stopTracking,
+            )
+          ],
         ),
       ),
+        ),
     );
   }
 }
