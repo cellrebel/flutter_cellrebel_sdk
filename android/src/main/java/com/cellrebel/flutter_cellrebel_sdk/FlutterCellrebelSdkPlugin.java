@@ -32,23 +32,24 @@ public class FlutterCellrebelSdkPlugin implements FlutterPlugin, MethodCallHandl
 	}
 
 	@Override
-	public void onMethodCall(@NonNull MethodCall call, @NonNull Result result) {
-		if (call.method.equals("getPlatformVersion")) {
-			result.success("Android " + android.os.Build.VERSION.RELEASE);
-		} else if (call.method.equals("init")) {
+	public void onMethodCall(@NonNull MethodCall call, @NonNull final Result result) {
+		if (call.method.equals("init")) {
 			final String clientId = call.argument("clientId");
 			TrackingManager.init(context, clientId);
+			result.success(null);
 		} else if (call.method.equals("startTracking")) {
 			TrackingManager.startTracking(context);
+			result.success(null);
 		} else if (call.method.equals("stopTracking")) {
 			TrackingManager.stopTracking(context);
+			result.success(null);
 		} else if (call.method.equals("getVersion")) {
 			result.success(TrackingManager.getVersion());
 		} else if (call.method.equals("clearUserData")) {
 			TrackingManager.clearUserData(context, new TrackingManager.OnCompleteListener() {
 				@Override
 				public void onCompleted(boolean b) {
-					Log.d("CellrebelSDK", "clearUserData result " + b);
+					result.success(b);
 				}
 			});
 		} else {

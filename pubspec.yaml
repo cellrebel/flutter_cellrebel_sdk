@@ -1,6 +1,6 @@
 name: flutter_cellrebel_sdk
 description: Flutter wrapper for CellRebelSDK
-version: 0.0.1
+version: 0.0.2
 homepage:
 
 environment:

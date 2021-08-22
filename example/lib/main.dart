@@ -15,18 +15,19 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   String _version = 'Unknown';
+  bool _isEnabled = true;
 
   @override
   void initState() {
     super.initState();
     initPlatformState();
-    CellRebelSDK.init("CLIENT_KEY");
   }
+
   Future<void> initPlatformState() async {
+    CellRebelSDK.init("CLIENT_KEY");
     String sdkVersion;
     try {
-      sdkVersion =
-          await CellRebelSDK.getVersion ?? 'Unknown platform version';
+      sdkVersion = await CellRebelSDK.getVersion ?? 'Unknown platform version';
     } on PlatformException {
       sdkVersion = 'Failed to get platform version.';
     }
@@ -37,30 +38,43 @@ class _MyAppState extends State<MyApp> {
     });
   }
 
+  void clearUserData() async {
+    bool success = await CellRebelSDK.clearUserData();
+    if (success) {
+      setState(() {
+        _isEnabled = false;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('Plugin example app'),
+          title: const Text('CellRebelSDK'),
         ),
         body: Center(
           child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            Text('Version: $_version\n'),
-            ElevatedButton(
-              child: Text('Start tracking'),
-              onPressed: CellRebelSDK.startTracking,
-            ),
-            ElevatedButton(
-              child: Text('Stop tracking'),
-              onPressed: CellRebelSDK.stopTracking,
-            )
-          ],
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Text('Version: $_version\n'),
+              ElevatedButton(
+                child: Text('Start tracking'),
+                onPressed: _isEnabled ? CellRebelSDK.startTracking : null,
+              ),
+              ElevatedButton(
+                child: Text('Stop tracking'),
+                onPressed: _isEnabled ? CellRebelSDK.stopTracking : null,
+              ),
+              ElevatedButton(
+                child: Text('Clear user data'),
+                onPressed: _isEnabled ? clearUserData : null,
+              )
+            ],
+          ),
         ),
       ),
-        ),
     );
   }
 }

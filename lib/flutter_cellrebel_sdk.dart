@@ -6,11 +6,6 @@ class CellRebelSDK {
   static const MethodChannel _channel =
       const MethodChannel('flutter_cellrebel_sdk');
 
-  static Future<String?> get platformVersion async {
-    final String? version = await _channel.invokeMethod('getPlatformVersion');
-    return version;
-  }
-
   static Future<String?> get getVersion async {
     final String? version = await _channel.invokeMethod('getVersion');
     return version;
@@ -28,7 +23,8 @@ class CellRebelSDK {
     _channel.invokeMethod('stopTracking');
   }
 
-  static Future<void> clearUserData() async {
-    _channel.invokeMethod('clearUserData');
+  static Future<bool> clearUserData() async {
+    final bool result = await _channel.invokeMethod('clearUserData');
+    return result;
   }
 }
