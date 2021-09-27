@@ -1,3 +1,6 @@
+## 1.8.6
+* CellRebelSDK 1.8.6
+
 ## 1.8.3
 * CellRebelSDK 1.8.3
 
